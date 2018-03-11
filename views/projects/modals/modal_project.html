@@ -1,0 +1,366 @@
+<div
+    id="modal-project"
+    class="modal fade"
+    role="dialog"
+    data-backdrop="static"
+    ng-controller="modalProjectCtrl"
+>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" ng-click="resetProjectsModalData()">&times;</button>
+            <h4 class="modal-title">
+                {{projectsModalTitle}}
+            </h4>
+        </div>
+
+        <div class="modal-body">
+
+            <div
+                class="alert alert-danger error-msg-project-modal"
+                ng-show="projectModalErrorMsg.length"
+            >
+                <p ng-repeat="error in projectModalErrorMsg">{{error}}</p>
+            </div>
+
+            <form name="projectModalForm" ng-submit="submitProjectData(startTimeModalMode)" novalidate>
+
+                <!-- Project name input -->
+                <div
+                    id="projectData0"
+                    class="form-group"
+                    ng-class="{
+                        'has-feedback':(!projectModalName.length
+                        && projectModalForm.projectModalNameInput.$touched)
+                        || invalidFieldProjectName,
+                        'has-error':(!projectModalName.length
+                        && projectModalForm.projectModalNameInput.$touched)
+                        || invalidFieldProjectName}"
+                    >
+                    <label for="name">Project name: </label>
+                    <input
+                        name="projectModalNameInput"
+                        type="text"
+                        class="form-control"
+                        ng-model="projectModalName"
+                        ng-required="true"
+                        ng-class="{
+                            'bg-danger':(!projectModalName.length
+                            && projectModalForm.projectModalNameInput.$touched)
+                            || invalidFieldProjectName}">
+                    <span
+                        class="glyphicon glyphicon-remove form-control-feedback"
+                        ng-show="
+                            (!projectModalName.length
+                            && projectModalForm.projectModalNameInput.$touched)
+                            || invalidFieldProjectName">
+                    </span>
+                </div> <!-- Name Input End -->
+
+                <!-- Manager Input -->
+                <div
+                    id="projectData1"
+                    class="form-group"
+                    ng-class="{
+                        'has-feedback':(!projectModalManager.length
+                        && projectModalForm.projectModalManagerInput.$touched)
+                        || invalidFieldProjectManager,
+                        'has-error':(!projectModalManager.length
+                        && projectModalForm.projectModalManagerInput.$touched)
+                        || invalidFieldProjectManager}">
+                    <label for="manager">Manager: </label>
+                    <input
+                        id="projectModalManagerInput"
+                        name="projectModalManagerInput"
+                        type="text"
+                        class="form-control"
+                        ng-model="projectModalManager"
+                        ng-required="true"
+                        ng-class="{
+                            'bg-danger':(!projectModalManager.length
+                            && projectModalForm.projectModalManagerInput.$touched)
+                            || invalidFieldProjectManager
+                        }">
+                    <span
+                        class="glyphicon glyphicon-remove form-control-feedback"
+                        ng-show="
+                            (!projectModalManager.length
+                            && projectModalForm.projectModalManagerInput.$touched)
+                            || invalidFieldProjectManager">
+                    </span>
+                </div> <!-- Manager Input End -->
+
+                <!-- HOURS INPUTS -->
+                <div class="row">
+
+                    <!-- Requirements Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData2"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalReqsInput.$invalid
+                                && projectModalForm.projectModalReqsInput.$touched)
+                                || invalidFieldProjectHours[0],
+                                'has-error':(projectModalForm.projectModalReqsInput.$invalid
+                                && projectModalForm.projectModalReqsInput.$touched)
+                                || invalidFieldProjectHours[0]}"
+                        >
+                            <label
+                                for="projectModalReqsInput"
+                            >
+                                <span class="projectModalHrsHeaderStandard">Reqs:</span>
+                                <span class="projectModalHrsHeaderMobile">Requirements:</span>
+                            </label>
+                            <input
+                                id="projectModalReqsInput"
+                                name="projectModalReqsInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalReqs"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalReqsInput.$invalid
+                                    && projectModalForm.projectModalReqsInput.$touched)
+                                    || invalidFieldProjectHours[0]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalReqsInput.$invalid
+                                    && projectModalForm.projectModalReqsInput.$touched)
+                                    || invalidFieldProjectHours[0]">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Design Hours Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData3"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalDesInput.$invalid
+                                && projectModalForm.projectModalDesInput.$touched)
+                                || invalidFieldProjectHours[1],
+                                'has-error':(projectModalForm.projectModalDesInput.$invalid
+                                && projectModalForm.projectModalDesInput.$touched)
+                                || invalidFieldProjectHours[1]}"
+                            >
+                            <label for="projectModalDesInput">
+                                <span class="projectModalHrsHeaderStandard">Des:</span>
+                                <span class="projectModalHrsHeaderMobile">Design:</span>
+                            </label>
+                            <input
+                                id="projectModalDesInput"
+                                name="projectModalDesInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalDes"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalDesInput.$invalid
+                                    && projectModalForm.projectModalDesInput.$touched)
+                                    || invalidFieldProjectHours[1]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalDesInput.$invalid
+                                    && projectModalForm.projectModalDesInput.$touched)
+                                    || invalidFieldProjectHours[1]">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Development Hours Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData4"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalDevInput.$invalid
+                                && projectModalForm.projectModalDevInput.$touched)
+                                || invalidFieldProjectHours[2],
+                                'has-error':(projectModalForm.projectModalDevInput.$invalid
+                                && projectModalForm.projectModalDevInput.$touched)
+                                || invalidFieldProjectHours[2]}"
+                            >
+                            <label for="projectModalDevInput">
+                                <span class="projectModalHrsHeaderStandard">Dev:</span>
+                                <span class="projectModalHrsHeaderMobile">Development:</span>
+                            </label>
+                            <input
+                                id="projectModalDevInput"
+                                name="projectModalDevInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalDev"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalDevInput.$invalid
+                                    && projectModalForm.projectModalDevInput.$touched)
+                                    || invalidFieldProjectHours[2]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalDevInput.$invalid
+                                    && projectModalForm.projectModalDevInput.$touched)
+                                    || invalidFieldProjectHours[2]">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- QA Hours Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData5"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalQaInput.$invalid
+                                && projectModalForm.projectModalQaInput.$touched)
+                                || invalidFieldProjectHours[3],
+                                'has-error':(projectModalForm.projectModalQaInput.$invalid
+                                && projectModalForm.projectModalQaInput.$touched)
+                                || invalidFieldProjectHours[3]}"
+                            >
+                            <label for="projectModalQaInput">
+                                <span class="projectModalHrsHeaderStandard">QA:</span>
+                                <span class="projectModalHrsHeaderMobile">QA:</span>
+                            </label>
+                            <input
+                                id="projectModalQaInput"
+                                name="projectModalQaInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalQa"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalQaInput.$invalid
+                                    && projectModalForm.projectModalQaInput.$touched)
+                                    || invalidFieldProjectHours[3]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalQaInput.$invalid
+                                    && projectModalForm.projectModalQaInput.$touched)
+                                    || invalidFieldProjectHours[3]">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- UAT Hours Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData6"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalUatInput.$invalid
+                                && projectModalForm.projectModalUatInput.$touched)
+                                || invalidFieldProjectHours[4],
+                                'has-error':(projectModalForm.projectModalUatInput.$invalid
+                                && projectModalForm.projectModalUatInput.$touched)
+                                || invalidFieldProjectHours[4]}"
+                            >
+                            <label for="projectModalUatInput">
+                                <span class="projectModalHrsHeaderStandard">UAT:</span>
+                                <span class="projectModalHrsHeaderMobile">UAT:</span>
+                            </label>
+                            <input
+                                id="projectModalUatInput"
+                                name="projectModalUatInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalUat"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalUatInput.$invalid
+                                    && projectModalForm.projectModalUatInput.$touched)
+                                    || invalidFieldProjectHours[4]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalUatInput.$invalid
+                                    && projectModalForm.projectModalUatInput.$touched)
+                                    || invalidFieldProjectHours[4]">
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Deployment Hours Input -->
+                    <div class="col-xs-6 col-sm-2">
+                        <div
+                            id="projectData7"
+                            class="form-group"
+                            ng-class="{
+                                'has-feedback':(projectModalForm.projectModalDeplInput.$invalid
+                                && projectModalForm.projectModalDeplInput.$touched)
+                                || invalidFieldProjectHours[5],
+                                'has-error':(projectModalForm.projectModalDeplInput.$invalid
+                                && projectModalForm.projectModalDeplInput.$touched)
+                                || invalidFieldProjectHours[5]}"
+                            >
+                            <label for="projectModalDeplInput">
+                                <span class="projectModalHrsHeaderStandard">Depl:</span>
+                                <span class="projectModalHrsHeaderMobile">Deployment:</span>
+                            </label>
+                            <input
+                                id="projectModalDeplInput"
+                                name="projectModalDeplInput"
+                                type="text"
+                                class="form-control"
+                                ng-model="projectModalDepl"
+                                ng-required="true"
+                                ng-pattern="/^[0-9]\d*$/"
+                                ng-class="{
+                                    'bg-danger':(projectModalForm.projectModalDeplInput.$invalid
+                                    && projectModalForm.projectModalDeplInput.$touched)
+                                    || invalidFieldProjectHours[5]}"
+                            >
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                ng-show="
+                                    (projectModalForm.projectModalDeplInput.$invalid
+                                    && projectModalForm.projectModalDeplInput.$touched)
+                                    || invalidFieldProjectHours[5]">
+                            </span>
+                        </div>
+                    </div>
+                </div> <!-- Project Hours Div End -->
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-block"
+                    ng-disabled="projectModalForm.$invalid"
+                    >{{projectsModalButton}}
+                </button>
+
+            </form>
+
+        </div> <!-- Project Modal Body End -->
+
+        <div class="modal-footer">
+            <button
+                id="projects-modal-submit"
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+                ng-click="resetProjectsModalData()">Close
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+</div>

@@ -1,0 +1,161 @@
+<!-- EXISTING TIMESHEET VIEW -->
+<div>
+
+    <button
+        type="button"
+        name="button"
+        class="btn btn-primary action-button section-button"
+        data-toggle="modal"
+        data-target="#modal-entry"
+        ng-click="broadcastEvent('entry', {mode: 'add', index: 'new'})"
+    >Add Entry
+    </button>
+
+    <!-- Start Time -->
+    <div class="row entry-container">
+
+        <!-- Row title -->
+        <div class="col-xs-3">
+            <p class="table-data table-data-header"><strong>Start Time:</strong></p>
+        </div>
+
+        <!-- Start Time -->
+        <div class="col-xs-3 col-sm-offset-3">
+            <p
+                class="table-data table-data-entry"
+                >{{dataService.timesheets[activeWeekTimesheet].days[activeTimesheet].start | date : "shortTime" }}
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="col-sm-1 col-sm-offset-1">
+            <button
+                type="button"
+                class="btn btn-primary btn-block action-button"
+                data-toggle="modal"
+                data-target="#modal-start-time"
+                ng-click="$parent.broadcastEvent('start time','edit')"
+            >
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+
+        <div class="col-sm-1">
+            <button
+                type="button"
+                class="btn btn-danger btn-block action-button"
+                data-toggle="modal"
+                data-target="#modal-confirmation"
+                ng-click="$parent.removeItemIndex = 'timesheet'"
+                ><span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+
+    </div> <!-- Start Time End-->
+
+    <div class="entries-container">
+
+        <!-- Headers -->
+        <div class="row headers-container">
+            <div class="col-sm-3"><h4>Entry Name</h4></div>
+            <div class="col-sm-3"><h4>Task</h4></div>
+            <div class="col-sm-2"><h4>End Time</h4></div>
+            <div class="col-sm-2"><h4>Duration</h4></div>
+        </div>
+
+        <div class="row headers-container-mobile">
+            <div class="col-xs-12"><p class="entry-header">Entries</p></div>
+        </div> <!-- End headers -->
+
+        <!-- Entries List -->
+        <div
+            class="row line-bottom entry-container"
+            ng-repeat="entry in dataService.timesheets[activeWeekTimesheet].days[activeTimesheet].entries"
+        >
+
+            <form name="entryForm">
+
+                <!-- entry name -->
+                <div class="col-sm-3">
+                    <p class="table-data table-data-header">
+                        <strong>{{dataService.displayProjectName(entry.id)}}</strong>
+                    </p>
+                </div>
+
+                <!-- entry type -->
+                <div class="col-sm-3">
+                    <div class="row">
+                        <div class="col-xs-4 entry-header-mobile">
+                            <h4>Entry Type:</h4>
+                        </div>
+                        <div class="col-xs-8 col-sm-12">
+                            <p class="table-data table-data-entry">{{entry.type}}</p>
+                        </div>
+                    </div>
+                </div> <!-- entry type end -->
+
+                <!-- entry end time -->
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-xs-4 entry-header-mobile">
+                            <h4>Start Time:</h4>
+                        </div>
+                        <div class="col-xs-8 col-sm-12">
+                            <p class="table-data table-data-entry">{{entry.endtime | date : "shortTime"}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- entry duration -->
+                <div class="col-sm-2">
+                    <div class="row">
+                        <div class="col-xs-4 entry-header-mobile">
+                            <h4>Duration:</h4>
+                        </div>
+                        <div class="col-xs-8 col-sm-12">
+                            <p class="table-data table-data-entry ">{{entryDuration($index)}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="col-sm-1">
+                    <button
+                        type="button"
+                        class="btn btn-primary btn-block action-button"
+                        data-toggle="modal"
+                        data-target="#modal-entry"
+                        ng-click="broadcastEvent('entry', {mode: 'edit', index: $index})"
+                    >
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </div>
+
+                <div class="col-sm-1">
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-block action-button"
+                        data-toggle="modal"
+                        data-target="#modal-confirmation"
+                        ng-click="$parent.$parent.removeItemIndex = $index"
+                    >
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div><!-- Action Buttons End -->
+
+            </form>
+
+        </div> <!-- ENTRIES LIST END -->
+    </div>
+
+    <button
+        type="button"
+        name="button"
+        class="btn btn-primary section-menu section-button"
+        data-toggle="modal"
+        data-target="#modal-entry"
+        ng-click="broadcastEvent('entry', {mode: 'add', index: 'new'})"
+    >Add Entry
+    </button>
+
+</div> <!-- EXISTING TIMESHEET VIEW END -->

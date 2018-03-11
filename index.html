@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Vigu Project Manager</title>
+		<link rel="stylesheet" href="content/css/bootstrap.min.css">
+		<link rel="stylesheet" href="content/css/style.css">
+		<script src="app/lib/angular.min.js"></script>
+		<script src="app/lib/angular-route.min.js"></script>
+		<script src="app/lib/jquery-3.2.1.min.js"></script>
+		<script src="app/lib/bootstrap.min.js"></script>
+		<script src="app/app.js"></script>
+		<script src="app/factories/dataservice.js"></script>
+		<script src="app/filters/dateToString.js"></script>
+		<script src="app/controllers/projects/projects.js"></script>
+		<script src="app/controllers/projects/modal_project.js"></script>
+		<script src="app/controllers/timesheets/timesheets.js"></script>
+		<script src="app/controllers/timesheets/modal_add_week.js"></script>
+		<script src="app/controllers/timesheets/modal_choose_week.js"></script>
+		<script src="app/controllers/timesheets/modal_entry.js"></script>
+		<script src="app/controllers/timesheets/modal_start_time.js"></script>
+		<script src="content/js/script.js"></script>
+	</head>
+
+	<body ng-app="ViguProjectManager">
+
+		<header ng-include src="'header.html'"></header>
+		<main ng-view></main>
+		<footer ng-include src="'footer.html'"></footer>
+
+	</body>
+</html>

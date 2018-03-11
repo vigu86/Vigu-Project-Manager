@@ -1,0 +1,135 @@
+<div class="timesheets container">
+
+    <h2>Timesheets</h2>
+
+    <div class="alert alert-info alert-dismissible">
+        <span href="#" class="close" data-dismiss="alert" aria-label="close">&times;</span>
+        <p>This is the Timesheets section.</p>
+        <p>In the Timesheets section, users create and manage their weekly work timesheets.</p>
+        <p><strong>Active week</strong></p>
+        <p>The grey section below indicates which week is now active by showing the date of that week's Sunday.</p>
+        <p>Below the grey area, the user can see the entries created for the given day. The active day is indicated by the highlighted "day of week" button.</p>
+        <p><strong>Adding new week</strong></p>
+        <p>The user can add a new week by clicking the "Add Week" button.</p>
+        <p><strong>Changing active week</strong></p>
+        <p>The user can change the active week by clicking the "Change Week" button.</p>
+        <p><strong>Adding new timesheets</strong></p>
+        <p>If the timesheet of a given day is not yes created, the user needs to click the "Add Timesheet" button and provide the start time of their work.</p>
+        <p><strong>Adding new entries</strong></p>
+        <p>When the timesheet is created, the user can then add new entries by clicking the "Add Entry" button. In the modal which shows up, the user provides the
+        time when they finished the task, as well as the project's name and phase.</p>
+        <p><strong>Updating and deleting entries</strong></p>
+        <p>The user can update or delete existing entries by using the action buttons on the right-hand side of the table.</p>
+        <p><strong>Summary</strong></p>
+        <p>The Summary tab shows all unique entries created in the active together with summarized hours spent on them.</p>
+    </div>
+
+    <!-- MAIN BUTTONS -->
+    <div class="row">
+        <div class="col-xs-12 section-menu">
+            <button
+                type="button"
+                class="btn btn-primary action-button section-button"
+                data-toggle="modal"
+                data-target="#modal-add-week"
+            >Add Week
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary action-button section-button"
+                data-toggle="modal"
+                data-target="#modal-choose-week"
+                ng-click="setModalView('select week')"
+                >Choose Week
+            </button>
+        </div>
+    </div>
+
+    <!-- WEEK HEADER -->
+    <div class="row">
+        <div class="well timesheets-weekdays-menu">
+            <h3 class="week-title">Week of {{dataService.timesheets[activeWeekTimesheet].weekOf | date: "longDate"}}</h3>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 0,
+                    'btn-default': activeTimesheet != 0
+                }"
+                ng-click="setActiveTimesheet(0)"
+                >Sun</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 1,
+                    'btn-default': activeTimesheet != 1
+                }"
+                ng-click="setActiveTimesheet(1)"
+            >Mon</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 2,
+                    'btn-default': activeTimesheet != 2
+                }"
+                ng-click="setActiveTimesheet(2)"
+            >Tue</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 3,
+                    'btn-default': activeTimesheet != 3
+                }"
+                ng-click="setActiveTimesheet(3)"
+            >Wed</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 4,
+                    'btn-default': activeTimesheet != 4
+                }"
+                ng-click="setActiveTimesheet(4)"
+            >Thu</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 5,
+                    'btn-default': activeTimesheet != 5
+                }"
+                ng-click="setActiveTimesheet(5)"
+            >Fri</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 6,
+                    'btn-default': activeTimesheet != 6
+                }"
+                ng-click="setActiveTimesheet(6)"
+            >Sat</button>
+            <button
+                type="button"
+                class="btn action-button section-button"
+                ng-class="{
+                    'btn-primary': activeTimesheet == 7,
+                    'btn-default': activeTimesheet != 7
+                 }"
+                 ng-click="setActiveTimesheet(7); getSummary()"
+            >Summary</button>
+        </div>
+    </div>
+
+    <ng-include src="'views/timesheets/subviews/' + dayView"></ng-include >
+
+    <ng-include src="'views/timesheets/modals/modal_add_week.html'"></ng-include >
+    <ng-include src="'views/timesheets/modals/modal_choose_week.html'"></ng-include>
+    <ng-include src="'views/timesheets/modals/modal_start_time.html'"></ng-include >
+    <ng-include src="'views/timesheets/modals/modal_entry.html'"></ng-include>
+    <ng-include src="'views/timesheets/modals/modal_confirmation.html'"></ng-include>
+
+</div> <!-- Timesheets Controller End -->

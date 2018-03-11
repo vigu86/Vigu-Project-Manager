@@ -1,0 +1,162 @@
+<div class="modal fade" id="modal-choose-week" role="dialog" data-backdrop="static" ng-controller="modalChooseWeekCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    ng-click="purgeChooseWeek()">&times;
+                </button>
+                <h4 class="modal-title">Week Timesheets</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert alert-info alert-dismissible">
+                    <span href="#" class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                    <p>To change active week, select the month and year of that week's Sunday with Sunday counted as the first day of the week. Then click "Search".</p>
+                    <p>If there are weeks created which meet the provided criteria, the list of them will show below the input fields.</p>
+                    <p>To activate the week, simply select it.</p>
+                </div>
+
+                <div class="alert alert-danger error-msg-choose-week" ng-show="selectWeekModalErrorMsg.length">
+                    <p ng-repeat="error in selectWeekModalErrorMsg">{{error}}</p>
+                </div>
+
+                <form name="selectWeekForm" ng-submit="getWeeks()" novalidate>
+                    <div class="row">
+
+                        <!-- Year Input -->
+                        <div class="col-sm-4">
+                            <div
+                                class="form-group"
+                                ng-class="{
+                                    'has-feedback':
+                                        (selectWeekForm.selectWeekYearInput.$invalid
+                                        && selectWeekForm.selectWeekYearInput.$touched)
+                                        || invalidFieldYear,
+                                    'has-error':
+                                        (selectWeekForm.selectWeekYearInput.$invalid
+                                        && selectWeekForm.selectWeekYearInput.$touched)
+                                        || invalidFieldYear}"
+                                >
+                                <label class="sr-only" for="weekFilterYear">Year:</label>
+                                <input
+                                    name="selectWeekYearInput"
+                                    class="form-control"
+                                    type="number"
+                                    min="0"
+                                    value="0"
+                                    placeholder="Enter Year"
+                                    ng-required = "true"
+                                    ng-model="selectWeekFltrYear"
+                                    ng-class="{
+                                        'bg-danger':
+                                            (selectWeekForm.selectWeekYearInput.$invalid
+                                            && selectWeekForm.selectWeekYearInput.$touched)
+                                            || invalidFieldYear}"
+                                >
+                                <span
+                                    class="glyphicon glyphicon-remove form-control-feedback"
+                                    ng-show="
+                                        (selectWeekForm.selectWeekYearInput.$invalid
+                                        && selectWeekForm.selectWeekYearInput.$touched)
+                                        || invalidFieldYear">
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Month Input -->
+                        <div class="col-sm-4">
+                            <div
+                                class="form-group"
+                                ng-class="{
+                                    'has-feedback':
+                                        (selectWeekForm.selectWeekMonthInput.$invalid
+                                        && selectWeekForm.selectWeekMonthInput.$touched)
+                                        || invalidFieldMonth,
+                                    'has-error':
+                                        (selectWeekForm.selectWeekMonthInput.$invalid
+                                        && selectWeekForm.selectWeekMonthInput.$touched)
+                                        || invalidFieldMonth}"
+                            >
+                                <label
+                                    class="sr-only"
+                                    for="selectWeekMonthInput">Month:
+                                </label>
+                                <select
+                                    id="selectWeekMonthInput"
+                                    name="selectWeekMonthInput"
+                                    class="form-control"
+                                    placeholder="Choose Month"
+                                    ng-required = "true"
+                                    ng-model="selectWeekFltrMonth"
+                                    ng-class="{
+                                        'bg-danger':
+                                            (selectWeekForm.selectWeekMonthInput.$invalid
+                                            && selectWeekForm.selectWeekMonthInput.$touched)
+                                            || invalidFieldMonth}"
+                                >
+                                    <option value="" selected disabled>Select Month</option>
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                                <span
+                                    class="glyphicon glyphicon-remove form-control-feedback input-select"
+                                    ng-show="
+                                        (selectWeekForm.selectWeekMonthInput.$invalid
+                                        && selectWeekForm.selectWeekMonthInput.$touched)
+                                        || invalidFieldMonth">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <button
+                                class="btn btn-primary btn-block"
+                                type="submit"
+                                ng-disabled="selectWeekForm.$invalid">Search
+                            </button>
+                        </div>
+
+                    </div> <!-- Row End -->
+
+                </form>
+
+                <!-- Week List -->
+                <ul class="list-group" ng-show="weeks.length != 0">
+                    <li
+                        class="list-group-item select-week-list-item"
+                        ng-repeat="week in weeks"
+                        ng-click="activateWeek($index); purgeChooseWeek()"
+                    >{{week | date: "longDate"}}
+                    </li>
+                </ul>
+
+            </div> <!-- Select Week Modal Body End -->
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                    ng-click="purgeChooseWeek()"
+                    >Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

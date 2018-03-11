@@ -1,0 +1,238 @@
+/* BOOTSTRAP OVERWRITES */
+
+.bg-danger {
+	background-color: #f2dede;
+}
+
+.timesheets-data-title {
+}
+
+.table-data {
+	vertical-align: middle;
+	line-height: 34px;
+	margin-bottom :0;
+}
+
+.table-data-header {}
+
+.table-data-entry {
+	text-align: right;
+}
+
+.timesheets-main-buttons {
+	padding-top: 20px;
+}
+
+.inline-form-input {
+	margin-right: 10px;
+}
+
+.ts-entry-endtime-input {
+	padding-right: 5px;
+}
+
+.ts-entry-endtime-now {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* UPDATE PROJECTS DATA MODAL */
+.input-danger {
+	background-color: #f2dede
+}
+
+.form-control-feedback.input-select {
+	right: 10px;
+}
+
+/* GENERAL STYLES */
+
+.internal-row {
+	margin-right: 0;
+	margin-left: 0;
+}
+h2 {
+	margin-top: 0;
+}
+
+.headers-container-mobile,
+.headers-container {
+	background-color: #f0f0f0;
+}
+
+.headers-container {
+	display: none;
+}
+
+.headers-container h4 {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.section-menu {
+	margin-bottom: 20px;
+}
+
+.action-button {
+	margin-bottom: 5px;
+}
+
+.section-button {
+	width: 100%
+}
+
+/* PROJECTS TAB */
+
+.projectListContainer {
+	margin-bottom: 20px;
+}
+
+/* TIMESHEETS */
+
+.projectModalHrsHeaderStandard {
+	display: none;
+}
+
+.entries-container {
+	margin-bottom: 20px;
+}
+
+.timesheets-weekdays-menu button {
+	margin-bottom: 5px;
+}
+
+.entry-container {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.line-bottom {
+	border-bottom: 1px solid #ccc;
+}
+
+.entry-input {
+	padding-right:0;
+}
+
+.week-title {
+	margin-top: 0;
+}
+
+.action-button {
+}
+
+.action-button-2 {
+	width: 49.33333333%;
+}
+
+.entry-header {
+	margin-top: 5px;
+}
+
+.entry-header-mobile h4 {
+	font-size: 14px;
+}
+
+.button-new-entry {
+	width: 100%;
+}
+
+.button-action {
+	display: block;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.now-button {
+	font-size: 11px;
+	padding-top: 9px;
+	padding-bottom: 9px;
+	width: 100%;
+}
+
+/* SELECT WEEK MODAL */
+.select-week-list-item {
+	cursor: pointer;
+}
+
+.select-week-list-item:hover {
+	background-color: #f0f0f0;
+}
+
+.select-week-selected {
+	background-color: #222;
+	color:#eee;
+}
+
+.select-week-selected:hover {
+	background-color: #444;
+	color:#eee;
+}
+
+.select-week-list-item-inactive {
+	color: #ddd;
+}
+
+footer {
+	padding: 20px 0 20px;
+	background-color: #eee;
+	border-top: 1px solid #ccc;
+	color: #555;
+	text-align: center;
+}
+
+
+/* RESPONSIVE STYLES */
+
+@media screen and (min-width: 768px) {
+	h2 {
+		margin-top: 20px;
+	}
+
+	.mobile-entry-header,
+	.modal-hours-header {
+		display: none;
+	}
+
+	.modal-headers-container,
+	.headers-container {
+		display: block;
+	}
+
+	.section-button {
+		width: auto;
+		min-width: 10%;
+	}
+
+	.table-data {
+		margin: 0;
+	}
+
+	.creator {
+		text-align: left;
+	}
+
+	.portfolio {
+		text-align: right;
+	}
+
+	/** TIMESHEETS **/
+
+	.projectModalHrsHeaderMobile{
+		display: none;
+	}
+
+	.projectModalHrsHeaderStandard {
+		display: inline;
+	}
+
+	.entry-header-mobile,
+	.headers-container-mobile {
+		display: none;
+	}
+
+	.table-data-entry {
+		text-align: left;
+	}
+
+}

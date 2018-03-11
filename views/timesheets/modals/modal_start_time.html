@@ -1,0 +1,103 @@
+<div
+    id="modal-start-time"
+    class="modal fade"
+    role="dialog"
+    data-backdrop="static"
+    ng-controller="modalStartTimeCtrl"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    ng-click="clearStartTimeModalData();"
+                    >&times;
+                </button>
+                <h4 class="modal-title">{{startTimeModalTitle}}</h4>
+            </div>
+
+            <div class="modal-body">
+                <div
+                    class="alert alert-danger error-msg-time-input"
+                    ng-show="startTimeModalErrorMsg.length"
+                >
+                    <p ng-repeat="error in startTimeModalErrorMsg">{{error}}</p>
+                </div>
+
+                <form name="startTimeForm" novalidate>
+                    <div class="row">
+
+                        <div
+                            id="startTimeInput_create"
+                            class=" col-sm-9"
+                        >
+                            <div class="form-group"
+                                ng-class="{
+                                    'has-error':
+                                        (startTimeForm.startTimeInput.$invalid
+                                        && startTimeForm.startTimeInput.$touched)
+                                        || invalidFieldStartTime,
+                                    'has-feedback':
+                                        (startTimeForm.startTimeInput.$invalid
+                                        && startTimeForm.startTimeInput.$touched)
+                                        || invalidFieldStartTime}"
+                            >
+                                <input
+                                id="startTimeInput"
+                                name="startTimeInput"
+                                type="text"
+                                class="form-control"
+                                step="600"
+                                ng-required = "true"
+                                ng-model="timesheetStartTime"
+                                ng-pattern="/^[0-2]?[0-9]:[0-5][0-9]$/"
+                                ng-class="{'bg-danger': (
+                                    startTimeForm.startTimeInput.$invalid
+                                    && startTimeForm.startTimeInput.$touched)
+                                    || invalidFieldStartTime}"
+                                >
+                                <span
+                                    ng-show="(
+                                        startTimeForm.startTimeInput.$invalid
+                                        && startTimeForm.startTimeInput.$touched)
+                                        || invalidFieldStartTime"
+                                    class="glyphicon glyphicon-remove form-control-feedback">
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-3">
+                            <button
+                                class="btn btn-default now-button"
+                                ng-click="setCurrentTimeStartTime()">Now
+                            </button>
+                        </div>
+
+                    </div> <!-- row div end -->
+                </form>
+
+                <button
+                    type="button"
+                    class="btn btn-primary btn-block"
+                    ng-click="submitStartTime()"
+                    ng-disabled="startTimeForm.startTimeInput.$invalid"
+                >{{startTimeModalButton}}
+                </button>
+
+            </div> <!-- modal body end -->
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                    ng-click="clearStartTimeModalData()">Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

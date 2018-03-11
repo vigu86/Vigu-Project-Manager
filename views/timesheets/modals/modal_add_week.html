@@ -1,0 +1,165 @@
+<div class="modal fade" id="modal-add-week" role="dialog" data-backdrop="static" ng-controller="modalAddWeekCtrl">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    ng-click="purgeNewWeek()">&times;
+                </button>
+                <h4 class="modal-title">Add Week</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert alert-info alert-dismissible">
+                    <span href="#" class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                    <p>To add a new week, select the month and year of that week's Sunday and click "Search".</p>
+                    <p>The displayed list will show all applicable Sundays which represent an entire week with Sunday counted as the first day.</p>
+                    <p>To create the week, simply select the week and click "Create".</p>
+                </div>
+
+                <div class="alert alert-danger error-msg-add-week" ng-show="addWeekModalErrorMsg.length">
+                    <p ng-repeat="error in addWeekModalErrorMsg">{{error}}</p>
+                </div>
+
+                <form name="addWeekForm" ng-submit="getSundays()" novalidate>
+                    <div class="row">
+
+                        <!-- Year input -->
+                        <div class="col-sm-4">
+                            <div
+                                class="form-group"
+                                ng-class="{
+                                    'has-feedback':
+                                        addWeekForm.addWeekYearInput.$invalid
+                                        && addWeekForm.addWeekYearInput.$touched,
+                                    'has-error':
+                                        addWeekForm.addWeekYearInput.$invalid
+                                        && addWeekForm.addWeekYearInput.$touched}"
+                                >
+                                <label
+                                    class="sr-only"
+                                    for="addWeekYearInput">Year:
+                                </label>
+                                <input
+                                    id="addWeekYearInput"
+                                    name="addWeekYearInput"
+                                    class="form-control"
+                                    type="number"
+                                    min="0"
+                                    placeholder="Enter Year"
+                                    ng-required="true"
+                                    ng-model="newWeekFltrYear"
+                                    ng-class="{
+                                        'bg-danger':
+                                            addWeekForm.addWeekYearInput.$invalid
+                                            && addWeekForm.addWeekYearInput.$touched}"
+                                >
+                                <span
+                                    class="glyphicon glyphicon-remove form-control-feedback"
+                                    ng-show="
+                                        (addWeekForm.addWeekYearInput.$invalid
+                                        && addWeekForm.addWeekYearInput.$touched)">
+                                </span>
+                            </div>
+                        </div> <!-- Year input end -->
+
+                        <!-- Month input -->
+                        <div class="col-sm-4">
+                            <div
+                                class="form-group"
+                                ng-class="{
+                                    'has-feedback':
+                                        addWeekForm.addWeekMonthInput.$invalid
+                                        && addWeekForm.addWeekMonthInput.$touched,
+                                    'has-error':
+                                        addWeekForm.addWeekMonthInput.$invalid
+                                        && addWeekForm.addWeekMonthInput.$touched}"
+                            >
+                                <label class="sr-only" for="addWeekMonth">Month:</label>
+                                <select
+                                    id="addWeekMonthInput"
+                                    name="addWeekMonthInput"
+                                    class="form-control"
+                                    placeholder="Choose Month"
+                                    ng-required="true"
+                                    ng-model="newWeekFltrMonth"
+
+                                    ng-class="{
+                                        'bg-danger':
+                                            addWeekForm.addWeekMonthInput.$invalid
+                                            && addWeekForm.addWeekMonthInput.$touched}"
+                                >
+                                    <option value="" disabled selected>Select Month</option>
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                                <span
+                                    class="glyphicon glyphicon-remove form-control-feedback input-select"
+                                    ng-show="
+                                        addWeekForm.addWeekMonthInput.$invalid
+                                        && addWeekForm.addWeekMonthInput.$touched">
+                                </span>
+                            </div>
+                        </div> <!-- Month input end -->
+
+                        <div class="col-sm-4">
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-block"
+                                ng-disabled="addWeekForm.$invalid">Search
+                            </button>
+                        </div>
+
+                    </div> <!-- row end -->
+                </form>
+
+                <!-- Week list -->
+                <div ng-show="newWeekSundays.length != 0">
+                    <ul id="newWeekList" class="list-group">
+                        <li
+                            class="list-group-item"
+                            ng-repeat="sunday in newWeekSundays"
+                            ng-click="selectWeek($index,sunday.existing)"
+                            ng-class="{
+                                'select-week-selected': newWeekSelected == $index,
+                                'select-week-list-item' : !sunday.existing,
+                                'select-week-list-item-inactive' : sunday.existing}">
+                            {{sunday.date | date: "longDate"}}
+                        </li>
+                    </ul>
+                    <button
+                        type="button"
+                        class="btn btn-warning"
+                        ng-click="createWeek()"
+                        data-dismiss="modal">Create
+                    </button>
+                </div> <!-- Week list end -->
+
+            </div> <!-- Add Week modal body end -->
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                    ng-click="purgeNewWeek()">Close
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

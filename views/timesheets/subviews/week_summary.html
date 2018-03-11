@@ -1,0 +1,219 @@
+<!-- WEEK SUMMARY-->
+<div>
+    <div class="row headers-container">
+        <div class="col-sm-2">
+            <h4>Entry</h4>
+        </div>
+        <div class="col-sm-2">
+            <h4>Task</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Sun</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Mon</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Tue</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Wed</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Thu</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Fri</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4>Sat</h4>
+        </div>
+        <div class="col-sm-1">
+            <h4><strong>Total</strong></h4>
+        </div>
+    </div>
+    <div class="row entry-container line-bottom" ng-repeat="summaryEntry in summary track by $index">
+        <div class="col-sm-2">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p class="table-data"><strong>{{dataService.displayProjectName(summaryEntry.id)}}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Type:</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.type}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Monday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[0] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Tuesday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[1] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Wednesday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[2] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Thursday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[3] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Friday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[4] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Saturday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[5] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Sunday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{summaryEntry.days[6] | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Total</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getRowTotal($index) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row entry-container">
+        <div class="col-sm-4">
+            <p><strong>Total</strong></p></div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Monday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(0) | dateToString}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Tuesday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(1) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Wednesday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(2) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Thursday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(3) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Friday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(4) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Saturday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(5) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Sunday</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(6) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <div class="row">
+                <div class="col-xs-4 headers-container-mobile">
+                    <p class="table-data"><strong>Total</strong></p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="table-data table-data-entry">{{getDayTotal(7) | dateToString}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

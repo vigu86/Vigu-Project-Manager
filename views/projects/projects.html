@@ -1,0 +1,135 @@
+<div class="container">
+
+    <div class="alert alert-info alert-dismissible">
+        <span href="#" class="close" data-dismiss="alert" aria-label="close">&times;</span>
+        <p><strong>Welcome to Vigu Project Manager!!!</strong></p>
+        <p>
+            This application enables users to manange and track their work time.
+            The users create entries which indicate at what time they finished working on a given task.
+            The application does all the calculations to show an entry's duration.
+            At each moment, the user has insight into how many hours they spent on a given project or project's phase in a current week or in total.
+        </p>
+    </div>
+
+    <h2>Projects</h2>
+
+    <div class="alert alert-info alert-dismissible">
+        <span href="#" class="close" data-dismiss="alert" aria-label="close">&times;</span>
+        <p>
+            The Projects section is where the user can manage their projects list.
+            The table below lists all created projects
+            and the hours spent on a given project phase - this is the number above the horizontal line -
+            as well as hours estimated for the phase - this is the number below the line.
+        </p>
+        <p>To create a new project, click on the 'Add Project' button.</p>
+        <p>To edit an existing project, click on the project's name.</p>
+    </div>
+
+    <!-- Projects page menu buttons -->
+    <div class="row">
+        <div class="col-xs-12 section-menu">
+            <button
+                class="btn btn-primary section-menu-item"
+                data-toggle="modal"
+                data-target="#modal-project"
+                ng-click="broadcastEvent('open project modal', {mode: 'add', index: undefined})"
+            >Add Project
+            </button>
+        </div>
+    </div>
+
+    <!-- Projects table -->
+    <div class="projectListContainer">
+        <div class="row headers-container">
+            <div class="col-sm-4">
+                <h4>Project Name</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>Reqs</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>Des</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>Dev</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>QA</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>UAT</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>Depl</h4>
+            </div>
+            <div class="col-sm-1">
+                <h4>Total</h4>
+            </div>
+        </div>
+
+        <!-- Project list -->
+        <div
+            class="row entry-container line-bottom"
+            ng-repeat="project in dataService.projects"
+        >
+
+            <!-- Project name -->
+            <div class="col-xs-12 col-sm-4">
+                <a
+                    class="table-data table-data-header"
+                    data-toggle="modal"
+                    data-target="#modal-project"
+                    ng-click="broadcastEvent('open project modal', {mode: 'edit', index: $index})"
+                >
+                    <strong>{{project.name}}</strong>
+                </a>
+            </div>
+
+            <!-- Project hours -->
+            <div class="col-xs-12 col-sm-1" ng-repeat="projectPhase in projectEntryData">
+                <div class="row">
+                    <div class="col-xs-6 entry-header-mobile">
+                        <h4>{{projectPhase.name}}</h4>
+                    </div>
+                    <div class="col-xs-6 col-sm-12">
+                        <div class="table-data line-bottom text-center">
+                            {{getProjectHours(projectPhase.type,$parent.$index) | dateToString}}
+                        </div>
+                        <div class="table-data text-center">
+                            {{project[projectPhase.type]}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project hours total -->
+            <div class="col-xs-6 entry-header-mobile">
+                <h4>Total:</h4>
+            </div>
+
+            <div class="col-xs-6 col-sm-1">
+                <div class="table-data line-bottom text-center">
+                    {{getProjTotSpentHrs($index) | dateToString}}
+                </div>
+                <div class="table-data text-center">
+                    {{getProjTotEstHrs($index)}}
+                </div>
+            </div>
+        </div> <!-- Project list end -->
+
+    </div> <!-- Projects table end -->
+
+    <div class="row">
+        <div class="col-xs-12 section-menu">
+            <button
+                class="btn btn-primary section-menu-item"
+                data-toggle="modal"
+                data-target="#modal-project"
+                ng-click="broadcastEvent('open project modal', {mode: 'add', index: undefined})">Add Project
+            </button>
+        </div>
+    </div>
+
+    <ng-include src="'views/projects/modals/modal_project.html'"></ng-include>
+
+</div> <!-- PROJECT CONTROLLER END -->
